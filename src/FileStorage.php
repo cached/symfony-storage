@@ -147,11 +147,11 @@ final class FileStorage implements Storage, TransferableStorage
         foreach ($resources as $resource) {
             $path = (string) $resource;
             if (preg_match($searchPatternWithIntl, $path, $matches)) {
-                $options['path'] = $path;
+                $options['path'] = str_replace($matches[0], '', $path);
                 $this->writer->write($catalogue, $matches[2], $options);
                 $written = true;
             } elseif (preg_match($searchPatternWithoutIntl, $path, $matches)) {
-                $options['path'] = $path;
+                $options['path'] = str_replace($matches[0], '', $path);
                 $this->writer->write($catalogue, $matches[1], $options);
                 $written = true;
             }
